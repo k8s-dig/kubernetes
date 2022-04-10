@@ -37,6 +37,7 @@ func main() {
 
 	pflag.CommandLine.SetNormalizeFunc(cliflag.WordSepNormalizeFunc)
 
+	// EntryPoint
 	command := app.NewAPIServerCommand()
 
 	logs.InitLogs()

@@ -45,11 +45,12 @@ import (
 )
 
 // BuiltInAuthenticationOptions contains all build-in authentication options for API Server
+// 아래에 있는 것이 인증 방법에 대한 정의들로 보인다.
 type BuiltInAuthenticationOptions struct {
 	APIAudiences    []string
 	Anonymous       *AnonymousAuthenticationOptions
 	BootstrapToken  *BootstrapTokenAuthenticationOptions
-	ClientCert      *genericoptions.ClientCertAuthenticationOptions
+	ClientCert      *genericoptions.ClientCertAuthenticationOptions // 이 부분이 mTLS 인증 관련
 	OIDC            *OIDCAuthenticationOptions
 	RequestHeader   *genericoptions.RequestHeaderAuthenticationOptions
 	ServiceAccounts *ServiceAccountAuthenticationOptions

@@ -72,6 +72,7 @@ func (v *authorizingVisitor) visit(source fmt.Stringer, rule *rbacv1.PolicyRule,
 	return true
 }
 
+// Authorize 여기까지 들어왔다면 이미 유저 정보에 대한 Authentication 은 끝난 것이다.
 func (r *RBACAuthorizer) Authorize(ctx context.Context, requestAttributes authorizer.Attributes) (authorizer.Decision, string, error) {
 	ruleCheckingVisitor := &authorizingVisitor{requestAttributes: requestAttributes}
 
@@ -79,6 +80,8 @@ func (r *RBACAuthorizer) Authorize(ctx context.Context, requestAttributes author
 	if ruleCheckingVisitor.allowed {
 		return authorizer.DecisionAllow, ruleCheckingVisitor.reason, nil
 	}
+
+	// 이 밑부터는 인가 실패 시 진행되는 부분이다.
 
 	// Build a detailed log of the denial.
 	// Make the whole block conditional so we don't do a lot of string-building we won't use.
